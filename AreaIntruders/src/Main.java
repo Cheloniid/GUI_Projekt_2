@@ -1,4 +1,7 @@
+import controller.GameController;
+import model.GameModel;
 import view.GamePanel;
+import view.MainFrame;
 
 import javax.swing.*;
 
@@ -8,13 +11,10 @@ public class Main {
 
             @Override
             public void run() {
-                JFrame frame = new JFrame("Area Intruders");
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.add(new GamePanel());
-                frame.pack();
-                frame.setLocationRelativeTo(null);
-                frame.setVisible(true);
-                // Comment df
+                GameModel model = new GameModel();
+                MainFrame view = new MainFrame(model);
+                GameController controller = new GameController(model, view);
+                controller.startGame();
             }
         });
     }
