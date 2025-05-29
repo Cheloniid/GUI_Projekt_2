@@ -1,5 +1,7 @@
 package model;
 
+import utils.Constants;
+
 public class Player {
     private int x;
     private int y;
@@ -23,5 +25,17 @@ public class Player {
 
     public void setY(int y) {
         this.y = y;
+    }
+
+    public void moveRight() {
+        if (x < Constants.PANEL_WIDTH - Constants.PLAYER_WIDTH) {
+            this.x += Constants.PLAYER_SPEED;
+        }
+    }
+
+    public void moveLeft() {
+        if (x > 0) {
+            this.x -= Constants.PLAYER_SPEED;
+        }
     }
 }

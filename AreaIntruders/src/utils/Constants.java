@@ -8,6 +8,7 @@ public class Constants {
 
     public static final int PLAYER_WIDTH = 20;
     public static final int PLAYER_HEIGHT = 30;
+    public static final int PLAYER_SPEED = 5;
 
     public static final int PANEL_HEIGHT = 600;
     public static final int PANEL_WIDTH = 800;

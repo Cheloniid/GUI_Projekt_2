@@ -1,17 +1,20 @@
 package view;
 
+import controller.GameController;
 import model.GameModel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Set;
 
 public class MainFrame extends JFrame {
-    private final GameModel gameModel;
+    private final GameModel model;
+    private GameController controller;
     private final GamePanel gamePanel;
     private final ControlPanel controlPanel;
 
     public MainFrame(GameModel model) {
-        this.gameModel = model;
+        this.model = model;
 
         gamePanel = new GamePanel(model);
         controlPanel = new ControlPanel();
@@ -27,5 +30,18 @@ public class MainFrame extends JFrame {
 
     public void repaintGamePanel(){
         this.gamePanel.repaint();
+    }
+
+    public void setController(GameController controller) {
+        this.controller = controller;
+        this.gamePanel.setController(controller);
+    }
+
+    public JPanel getGamePanel() {
+        return gamePanel;
+    }
+
+    public Set<Integer> getPressedKeys(){
+        return gamePanel.getPressedKeys();
     }
 }
