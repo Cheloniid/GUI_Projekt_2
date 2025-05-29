@@ -19,13 +19,12 @@ public class GamePanel extends JPanel {
     private GameRenderer renderer;
     private InputMap inputMap;
     private ActionMap actionMap;
-    private final Set<Integer> pressedKeys;
+
 
 
     public GamePanel(GameModel model) {
         this.model = model;
         renderer = new GameRenderer();
-        pressedKeys = new HashSet<>();
         setPreferredSize(new Dimension(Constants.PANEL_WIDTH, Constants.PANEL_HEIGHT));
         setBackground(Constants.GAME_PANEL_BACKGROUND);
 
@@ -37,7 +36,7 @@ public class GamePanel extends JPanel {
         actionMap.put("pressed left", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                pressedKeys.add(KeyEvent.VK_LEFT);
+                controller.getPressedKeys().add(KeyEvent.VK_LEFT);
             }
         });
 
@@ -45,7 +44,7 @@ public class GamePanel extends JPanel {
         actionMap.put("released left", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                pressedKeys.remove(KeyEvent.VK_LEFT);
+                controller.getPressedKeys().remove(KeyEvent.VK_LEFT);
             }
         });
 
@@ -53,7 +52,7 @@ public class GamePanel extends JPanel {
         actionMap.put("pressed right", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                pressedKeys.add(KeyEvent.VK_RIGHT);
+                controller.getPressedKeys().add(KeyEvent.VK_RIGHT);
             }
         });
 
@@ -61,7 +60,15 @@ public class GamePanel extends JPanel {
         actionMap.put("released right", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                pressedKeys.remove(KeyEvent.VK_RIGHT);
+                controller.getPressedKeys().remove(KeyEvent.VK_RIGHT);
+            }
+        });
+
+        inputMap.put(KeyStroke.getKeyStroke("SPACE"), "space" );
+        actionMap.put("space", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controller.fire();
             }
         });
     }
@@ -82,9 +89,5 @@ public class GamePanel extends JPanel {
 
     public void setController(GameController controller) {
         this.controller = controller;
-    }
-
-    public Set<Integer> getPressedKeys() {
-        return pressedKeys;
     }
 }

@@ -5,6 +5,10 @@ import model.GameModel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.Map;
 import java.util.Set;
 
 public class MainFrame extends JFrame {
@@ -18,6 +22,30 @@ public class MainFrame extends JFrame {
 
         gamePanel = new GamePanel(model);
         controlPanel = new ControlPanel();
+
+        for (JButton button : controlPanel.getButtons()){
+            button.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mousePressed(MouseEvent e){
+                    if (button.getText().equals("LEFT")){
+                        controller.getPressedKeys().add(KeyEvent.VK_LEFT);
+                    } else if (button.getText().equals("RIGHT")){
+                        controller.getPressedKeys().add(KeyEvent.VK_RIGHT);
+                    } else if (button.getText().equals("FIRE!")){
+                        controller.fire();
+                    }
+                }
+                public void mouseReleased(MouseEvent e){
+                    if (button.getText().equals("LEFT")){
+                        controller.getPressedKeys().remove(KeyEvent.VK_LEFT);
+                    } else if (button.getText().equals("RIGHT")){
+                        controller.getPressedKeys().remove(KeyEvent.VK_RIGHT);
+                    } else if (button.getText().equals("FIRE!")){
+                        controller.getPressedKeys().remove(KeyEvent.VK_SPACE);
+                    }
+                }
+            });
+        }
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Area Intruders");
@@ -39,9 +67,5 @@ public class MainFrame extends JFrame {
 
     public JPanel getGamePanel() {
         return gamePanel;
-    }
-
-    public Set<Integer> getPressedKeys(){
-        return gamePanel.getPressedKeys();
     }
 }
