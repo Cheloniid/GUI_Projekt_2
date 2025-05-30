@@ -17,11 +17,17 @@ public class GameModel {
                 Constants.PANEL_HEIGHT - Constants.PLAYER_HEIGHT - 20);
 
         enemies = new ArrayList<>();
-        enemies.add(new SmallEnemy(100, 100));
-        enemies.add(new LargeEnemy(200, 200));
+        for (int row = 0; row < Constants.ENEMY_ROWS; row++){
+            for (int col = 0; col < Constants.ENEMY_COLUMNS; col++){
+                enemies.add(new SmallEnemy(
+                        Constants.ENEMY_HORIZONTAL_RANGE + 20 + col * Constants.GAP_BETWEEN_ENEMY_COLUMNS,
+                        50 + row * Constants.GAP_BETWEEN_ENEMY_ROWS));
+            }
+        }
     }
 
     public void update() {
+        enemies.stream().forEach(enemy -> enemy.move());
     }
 
     public Player getPlayer() {

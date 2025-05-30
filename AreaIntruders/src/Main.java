@@ -21,13 +21,13 @@ public class Main {
     }
 }
 // TODO Work on diff settings
-// TODO przesuwanie strzałkami
-// TODO przesuwanie JButtonami
+// przesuwanie strzałkami
+// przesuwanie JButtonami
 // TODO strzelanie spacją
 // TODO strzelanie JButtonem
 // TODO ekran startowy ze zdjęciem
-// TODO rzędy wrogów
-// TODO poruszanie wrogów
+// rzędy wrogów
+// poruszanie wrogów
 // TODO opadanie wrogów
 // TODO znikanie wrogów po trafieniu
 // TODO punktacja
@@ -45,4 +45,5 @@ public class Main {
 // TODO streamy
 // TODO interfejsy
 // TODO watki
-// TODO
+
+// TODO large enemy

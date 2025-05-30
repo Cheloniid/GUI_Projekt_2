@@ -15,4 +15,12 @@ public class Constants {
 
     public static final float SMALL_ENEMY_SIZE = 1.2f;
     public static final float LARGE_ENEMY_SIZE = 2f;
+
+    public static final float ENEMY_SPEED = 1f;
+    public static final int ENEMY_HORIZONTAL_RANGE = (int) (0.3 * PANEL_WIDTH);
+
+    public static final int ENEMY_ROWS = 5;
+    public static final int ENEMY_COLUMNS = 8;
+    public static final int GAP_BETWEEN_ENEMY_ROWS = 60;
+    public static final int GAP_BETWEEN_ENEMY_COLUMNS = 65;
 }

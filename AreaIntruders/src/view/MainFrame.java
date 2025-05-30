@@ -52,6 +52,7 @@ public class MainFrame extends JFrame {
         add(gamePanel, BorderLayout.CENTER);
         add(controlPanel, BorderLayout.SOUTH);
         pack();
+        setResizable(false);
         setLocationRelativeTo(null);
         setVisible(true);
     }
