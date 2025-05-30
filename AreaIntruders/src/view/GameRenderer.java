@@ -1,9 +1,6 @@
 package view;
 
-import model.Enemy;
-import model.LargeEnemy;
-import model.Player;
-import model.SmallEnemy;
+import model.*;
 import utils.Constants;
 
 import java.awt.*;
@@ -22,13 +19,13 @@ public class GameRenderer {
         int width = (int) (sizeFactor * 40);
         int height = (int) (sizeFactor * 10);
 
-        g2d.setColor(new Color(180, 0, 255));
+        g2d.setColor(Color.WHITE);
         g2d.fillOval(x, y + (int) sizeFactor, width, height);
 
-        g2d.setColor(new Color(0, 0, 255));
+        g2d.setColor(Constants.UFO_COLOR);
         g2d.fillOval(x, y, width, height);
 
-        g2d.setColor(new Color(0, 255, 255, 150));
+        g2d.setColor(Constants.UFO_WINDOW_COLOR);
         g2d.fillOval(x + (int) (0.2 * width), y - (int) (0.15 * height),
                 (int) (0.6 * width), (int) ( 0.6 * height));
     }
@@ -40,5 +37,10 @@ public class GameRenderer {
         int[] xPoints = {playerX, playerX + Constants.PLAYER_WIDTH / 2, playerX + Constants.PLAYER_WIDTH};
         int[] yPoints = {playerY + Constants.PLAYER_HEIGHT, playerY, playerY + Constants.PLAYER_HEIGHT};
         g2d.fillPolygon(xPoints, yPoints, 3);
+    }
+
+    public void paintPlayerMissile(Graphics2D g2d, PlayerMissile missile) {
+        g2d.setColor(Constants.PLAYERS_MISSILE_COLOR);
+        g2d.fillRect(missile.getX(), missile.getY(), 3, 14);
     }
 }

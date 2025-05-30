@@ -4,11 +4,14 @@ import utils.Constants;
 import utils.DifficultySettings;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class GameModel {
     private Player player;
     private ArrayList<Enemy> enemies;
     private DifficultySettings difficultySettings;
+    private List<PlayerMissile> playerMissiles;
+    private long lastPlayersMissileStart = 0;
 
     public GameModel() {
         difficultySettings = DifficultySettings.easySettings();
@@ -24,10 +27,20 @@ public class GameModel {
                         50 + row * Constants.GAP_BETWEEN_ENEMY_ROWS));
             }
         }
+
+        playerMissiles = new ArrayList<>();
     }
 
     public void update() {
         enemies.stream().forEach(enemy -> enemy.move());
+        playerMissiles.stream().forEach(playerMissile -> playerMissile.move());
+    }
+
+    public void shootPlayersMissile(){
+        if (System.currentTimeMillis() - lastPlayersMissileStart > difficultySettings.playersFireInterval){
+            playerMissiles.add(new PlayerMissile(player.getX() + Constants.PLAYER_WIDTH / 2 - 2, player.getY()));
+            lastPlayersMissileStart = System.currentTimeMillis();
+        }
     }
 
     public Player getPlayer() {
@@ -36,6 +49,10 @@ public class GameModel {
 
     public ArrayList<Enemy> getEnemies() {
         return enemies;
+    }
+
+    public List<PlayerMissile> getPlayerMissiles() {
+        return playerMissiles;
     }
 
     public void moveRigth(){

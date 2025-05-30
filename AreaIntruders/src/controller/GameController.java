@@ -48,6 +48,7 @@ public class GameController {
 
     public void fire(){
         System.out.println("FIRE!");
+        model.shootPlayersMissile();
     }
 
     public void startGame() {

@@ -3,8 +3,11 @@ package utils;
 import java.awt.*;
 
 public class Constants {
-    public static final Color GAME_PANEL_BACKGROUND = Color.DARK_GRAY;
-    public static final Color PLAYER_COLOR = Color.GREEN;
+    public static final Color GAME_PANEL_BACKGROUND = new Color(70, 53, 177);
+    public static final Color PLAYER_COLOR = new Color(174, 234, 148);;
+    public static final Color PLAYERS_MISSILE_COLOR = new Color(174, 234, 148);
+    public static final Color UFO_COLOR = new Color(183, 113, 229);
+    public static final Color UFO_WINDOW_COLOR = new Color(255, 251, 202);
 
     public static final int PLAYER_WIDTH = 20;
     public static final int PLAYER_HEIGHT = 30;
@@ -18,6 +21,9 @@ public class Constants {
 
     public static final float ENEMY_SPEED = 1f;
     public static final int ENEMY_HORIZONTAL_RANGE = (int) (0.3 * PANEL_WIDTH);
+
+    public static final float ENEMY_MISSILE_SPEED = 2f;
+    public static final float PLAYER_MISSILE_SPEED = 7f;
 
     public static final int ENEMY_ROWS = 5;
     public static final int ENEMY_COLUMNS = 8;
