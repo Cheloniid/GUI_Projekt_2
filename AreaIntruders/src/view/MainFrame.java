@@ -16,12 +16,25 @@ public class MainFrame extends JFrame {
     private GameController controller;
     private final GamePanel gamePanel;
     private final ControlPanel controlPanel;
+    private final HealthPanel healthPanel;
+    private final ScorePanel scorePanel;
 
     public MainFrame(GameModel model) {
         this.model = model;
 
         gamePanel = new GamePanel(model);
         controlPanel = new ControlPanel();
+        healthPanel = new HealthPanel();
+        scorePanel = new ScorePanel();
+
+        JPanel bottomPanel = new JPanel();
+        bottomPanel.setLayout(new GridLayout(1, 3));
+        bottomPanel.add(healthPanel);
+        bottomPanel.add(controlPanel);
+        bottomPanel.add(scorePanel);
+        add(gamePanel, BorderLayout.CENTER);
+        add(bottomPanel, BorderLayout.SOUTH);
+
 
         for (JButton button : controlPanel.getButtons()){
             button.addMouseListener(new MouseAdapter() {
@@ -49,8 +62,7 @@ public class MainFrame extends JFrame {
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Area Intruders");
-        add(gamePanel, BorderLayout.CENTER);
-        add(controlPanel, BorderLayout.SOUTH);
+
         pack();
         setResizable(false);
         setLocationRelativeTo(null);
