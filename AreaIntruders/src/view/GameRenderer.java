@@ -1,6 +1,6 @@
 package view;
 
-import model.*;
+import model.entities.*;
 import utils.Constants;
 
 import java.awt.*;
@@ -41,6 +41,6 @@ public class GameRenderer {
 
     public void paintPlayerMissile(Graphics2D g2d, PlayerMissile missile) {
         g2d.setColor(Constants.PLAYERS_MISSILE_COLOR);
-        g2d.fillRect(missile.getX(), missile.getY(), 3, 14);
+        g2d.fillRect(missile.getX(), missile.getY(), 4, 14);
     }
 }

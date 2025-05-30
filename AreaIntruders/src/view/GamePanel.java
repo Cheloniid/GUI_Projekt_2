@@ -1,17 +1,15 @@
 package view;
 
 import controller.GameController;
-import model.Enemy;
+import model.entities.Enemy;
 import model.GameModel;
-import model.PlayerMissile;
+import model.entities.PlayerMissile;
 import utils.Constants;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import java.util.HashSet;
-import java.util.Set;
 
 public class GamePanel extends JPanel {
 

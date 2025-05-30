@@ -1,9 +1,9 @@
-package model;
+package model.entities;
 
 import utils.Constants;
 import utils.Direction;
 
-public class Enemy {
+public abstract class Enemy {
     private int x;
     private int y;
     private float floatX;

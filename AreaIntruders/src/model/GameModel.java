@@ -1,5 +1,9 @@
 package model;
 
+import model.entities.Enemy;
+import model.entities.Player;
+import model.entities.PlayerMissile;
+import model.entities.SmallEnemy;
 import utils.Constants;
 import utils.DifficultySettings;
 
@@ -12,6 +16,7 @@ public class GameModel {
     private DifficultySettings difficultySettings;
     private List<PlayerMissile> playerMissiles;
     private long lastPlayersMissileStart = 0;
+    private EnemyHitDetector enemyHitDetector;
 
     public GameModel() {
         difficultySettings = DifficultySettings.easySettings();
@@ -29,11 +34,13 @@ public class GameModel {
         }
 
         playerMissiles = new ArrayList<>();
+        enemyHitDetector = new EnemyHitDetector(playerMissiles, enemies);
     }
 
     public void update() {
         enemies.stream().forEach(enemy -> enemy.move());
         playerMissiles.stream().forEach(playerMissile -> playerMissile.move());
+        enemyHitDetector.detect();
     }
 
     public void shootPlayersMissile(){
