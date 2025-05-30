@@ -16,6 +16,6 @@ public class DifficultySettings {
 
     public static DifficultySettings easySettings() {
         return new DifficultySettings(
-                5, 5, 1000,false);
+                5, 5, 300,false);
     }
 }

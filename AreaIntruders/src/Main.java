@@ -21,15 +21,16 @@ public class Main {
     }
 }
 // TODO Work on diff settings
+// TODO ilość wrogów na linię powinna być uzależniona od poziomu trudności
 // przesuwanie strzałkami
 // przesuwanie JButtonami
-// TODO strzelanie spacją
-// TODO strzelanie JButtonem
+// strzelanie spacją
+// strzelanie JButtonem
 // TODO ekran startowy ze zdjęciem
 // rzędy wrogów
 // poruszanie wrogów
 // TODO opadanie wrogów
-// TODO znikanie wrogów po trafieniu
+// znikanie wrogów po trafieniu
 // TODO punktacja
 // TODO nick
 // TODO zasady gry

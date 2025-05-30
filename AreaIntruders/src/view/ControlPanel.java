@@ -33,6 +33,7 @@ public class ControlPanel extends JPanel{
             for (JButton button : buttons){
                 button.setBackground(Constants.GAME_PANEL_BACKGROUND);
                 button.setForeground(Constants.PLAYER_COLOR);
+                button.setFont(new Font("Monospaced", Font.BOLD, 22));
                 button.setPreferredSize(new Dimension(80, 30));
                 button.setFocusable(false);
 
