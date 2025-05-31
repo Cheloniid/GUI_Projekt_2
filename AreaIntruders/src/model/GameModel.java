@@ -21,19 +21,13 @@ public class GameModel {
 
     public GameModel() {
         this.randomGen = new Random();
-        difficultySettings = DifficultySettings.easySettings();
+        difficultySettings = DifficultySettings.normalSettings();
 
         player = new Player(Constants.PANEL_WIDTH / 2 - Constants.PLAYER_WIDTH / 2,
                 Constants.PANEL_HEIGHT - Constants.PLAYER_HEIGHT - 20);
 
         enemies = new ArrayList<>();
-        for (int row = 0; row < Constants.ENEMY_ROWS; row++) {
-            for (int col = 0; col < Constants.ENEMY_COLUMNS; col++) {
-                enemies.add(new SmallEnemy(
-                        Constants.ENEMY_HORIZONTAL_RANGE + 20 + col * Constants.GAP_BETWEEN_ENEMY_COLUMNS,
-                        50 + row * Constants.GAP_BETWEEN_ENEMY_ROWS));
-            }
-        }
+        generateEnemies(enemies);
 
         playerMissiles = new ArrayList<>();
         enemyMissiles = new ArrayList<>();
@@ -42,8 +36,8 @@ public class GameModel {
     }
 
     public void update() {
-        enemies.stream().forEach(enemy -> enemy.move());
-        playerMissiles.stream().forEach(playerMissile -> playerMissile.move());
+        enemies.stream().forEach(Enemy::move);
+        playerMissiles.stream().forEach(PlayerMissile::move);
         enemyMissiles.stream().forEach(EnemyMissile::move);
 
         if (Constants.DETECT_COLLISIONS_WITH_ENEMY) {
@@ -60,10 +54,25 @@ public class GameModel {
                 }
             }
         }
+
+        if (enemies.isEmpty()) {
+            generateEnemies(enemies);
+            difficultySettings.increaseDifficulty();
+        }
+    }
+
+    public void generateEnemies(List<Enemy> enemies) {
+        for (int row = 0; row < Constants.ENEMY_ROWS; row++) {
+            for (int col = 0; col < difficultySettings.enemyColumns; col++) {
+                enemies.add(new SmallEnemy(
+                        Constants.ENEMY_HORIZONTAL_RANGE + 20 + col * Constants.GAP_BETWEEN_ENEMY_COLUMNS,
+                        50 + row * Constants.GAP_BETWEEN_ENEMY_ROWS));
+            }
+        }
     }
 
     public void shootPlayersMissile() {
-        if (System.currentTimeMillis() - lastPlayersMissileStart > difficultySettings.playersFireInterval) {
+        if (System.currentTimeMillis() - lastPlayersMissileStart > Constants.PLAYER_FIRE_INTERVAL) {
             playerMissiles.add(new PlayerMissile(player.getX() + Constants.PLAYER_WIDTH / 2 - 2, player.getY()));
             lastPlayersMissileStart = System.currentTimeMillis();
         }

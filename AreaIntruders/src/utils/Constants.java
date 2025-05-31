@@ -9,6 +9,9 @@ public class Constants {
     public static final Color UFO_COLOR = new Color(183, 113, 229);
     public static final Color UFO_WINDOW_COLOR = new Color(255, 251, 202);
 
+    public static final int PANEL_HEIGHT = 600;
+    public static final int PANEL_WIDTH = 800;
+
     public static final boolean SHOOT_ENEMY_MISSILES = true;
     public static final boolean DETECT_COLLISIONS_WITH_ENEMY = true;
     public static final boolean DETECT_COLLISIONS_WITH_PLAYER = true;
@@ -16,21 +19,16 @@ public class Constants {
     public static final int PLAYER_WIDTH = 20;
     public static final int PLAYER_HEIGHT = 30;
     public static final int PLAYER_SPEED = 5;
-
-    public static final int PANEL_HEIGHT = 600;
-    public static final int PANEL_WIDTH = 800;
+    public static final float PLAYER_MISSILE_SPEED = 7f;
+    public static final int PLAYER_FIRE_INTERVAL = 150;
 
     public static final float SMALL_ENEMY_SIZE = 1.2f;
     public static final float LARGE_ENEMY_SIZE = 2f;
-
     public static final float ENEMY_SPEED = 1f;
-    public static final int ENEMY_HORIZONTAL_RANGE = (int) (0.3 * PANEL_WIDTH);
-
     public static final float ENEMY_MISSILE_SPEED = 2f;
-    public static final float PLAYER_MISSILE_SPEED = 7f;
 
     public static final int ENEMY_ROWS = 5;
-    public static final int ENEMY_COLUMNS = 8;
     public static final int GAP_BETWEEN_ENEMY_ROWS = 60;
     public static final int GAP_BETWEEN_ENEMY_COLUMNS = 65;
+    public static final int ENEMY_HORIZONTAL_RANGE = (int) (0.3 * PANEL_WIDTH);
 }

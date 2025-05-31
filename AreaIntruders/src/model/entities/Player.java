@@ -59,7 +59,7 @@ public class Player {
     }
 
     public void addScore(int score) {
-        this.score += score;
+        this.score += score * 10;
     }
 
     public void subtractHealth(int hits){

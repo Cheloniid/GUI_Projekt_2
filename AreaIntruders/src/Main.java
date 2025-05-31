@@ -31,7 +31,7 @@ public class Main {
 // poruszanie wrogów
 // TODO opadanie wrogów
 // znikanie wrogów po trafieniu
-// TODO punktacja
+// punktacja
 // TODO nick
 // TODO zasady gry
 // TODO ponowna rozgrywka

@@ -22,6 +22,7 @@ public class GameController {
         this.view = view;
         pressedKeys = new HashSet<>();
 
+        // GAME TIMER //
         gameTimer = new Timer(1000 / 60, e -> {
             frames++;
 
@@ -36,9 +37,6 @@ public class GameController {
             view.getScorePanel().update();
             view.getHealthPanel().update();
         });
-
-
-        setInput();
     }
 
     public void moveRight(){
@@ -49,12 +47,7 @@ public class GameController {
         model.moveLeft();
     }
 
-    private void setInput() {
-
-    }
-
     public void fire(){
-        System.out.println("FIRE!");
         model.shootPlayersMissile();
     }
 
