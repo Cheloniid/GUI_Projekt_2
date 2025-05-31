@@ -9,6 +9,10 @@ public class Constants {
     public static final Color UFO_COLOR = new Color(183, 113, 229);
     public static final Color UFO_WINDOW_COLOR = new Color(255, 251, 202);
 
+    public static final boolean SHOOT_ENEMY_MISSILES = true;
+    public static final boolean DETECT_COLLISIONS_WITH_ENEMY = true;
+    public static final boolean DETECT_COLLISIONS_WITH_PLAYER = true;
+
     public static final int PLAYER_WIDTH = 20;
     public static final int PLAYER_HEIGHT = 30;
     public static final int PLAYER_SPEED = 5;

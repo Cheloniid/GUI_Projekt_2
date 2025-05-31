@@ -7,4 +7,9 @@ public class EnemyMissile extends Projectile {
         super(x, y);
         this.speed = Constants.ENEMY_MISSILE_SPEED;
     }
+
+    public void move(){
+        this.floatY += this.speed;
+        this.y = (int) floatY;
+    }
 }

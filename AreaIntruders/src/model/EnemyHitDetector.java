@@ -10,15 +10,20 @@ import java.util.List;
 public class EnemyHitDetector implements HitDetector {
     private List<Projectile> projectiles;
     private List<Enemy> enemies;
+    List<Projectile> projectilesToRemove;
+    List<Enemy> enemiesToRemove;
 
     public EnemyHitDetector(List projectiles, List enemies) {
         this.projectiles = projectiles;
         this.enemies = enemies;
+        projectilesToRemove = new ArrayList<>();
+        enemiesToRemove = new ArrayList<>();
     }
 
-    public void detect() {
-        List<Projectile> projectilesToRemove = new ArrayList<>();
-        List<Enemy> enemiesToRemove = new ArrayList<>();
+    public int getNumberOfHits() {
+
+        int numberOfHits = 0;
+
         for (Projectile projectile : projectiles) {
             int x = projectile.getX() + 2;
             int y = projectile.getY();
@@ -27,10 +32,12 @@ public class EnemyHitDetector implements HitDetector {
                     && y >= enemy.getY() && y <= enemy.getY() + 10 * Constants.SMALL_ENEMY_SIZE){
                     projectilesToRemove.add(projectile);
                     enemiesToRemove.add(enemy);
+                    numberOfHits++;
                 }
             }
         }
         projectiles.removeAll(projectilesToRemove);
         enemies.removeAll(enemiesToRemove);
+        return numberOfHits;
     }
 }

@@ -24,8 +24,8 @@ public class MainFrame extends JFrame {
 
         gamePanel = new GamePanel(model);
         controlPanel = new ControlPanel();
-        healthPanel = new HealthPanel();
-        scorePanel = new ScorePanel();
+        healthPanel = new HealthPanel(model.getPlayer());
+        scorePanel = new ScorePanel(model.getPlayer());
 
         JPanel bottomPanel = new JPanel();
         bottomPanel.setLayout(new GridLayout(1, 3));
@@ -80,5 +80,13 @@ public class MainFrame extends JFrame {
 
     public JPanel getGamePanel() {
         return gamePanel;
+    }
+
+    public HealthPanel getHealthPanel() {
+        return healthPanel;
+    }
+
+    public ScorePanel getScorePanel() {
+        return scorePanel;
     }
 }

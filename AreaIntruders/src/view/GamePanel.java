@@ -3,6 +3,7 @@ package view;
 import controller.GameController;
 import model.entities.Enemy;
 import model.GameModel;
+import model.entities.EnemyMissile;
 import model.entities.PlayerMissile;
 import utils.Constants;
 
@@ -86,6 +87,9 @@ public class GamePanel extends JPanel {
         }
         for (PlayerMissile missile : model.getPlayerMissiles()){
             renderer.paintPlayerMissile(g2d, missile);
+        }
+        for (EnemyMissile missile : model.getEnemyMissiles()){
+            renderer.paintEnemyMissile(g2d, missile);
         }
     }
 

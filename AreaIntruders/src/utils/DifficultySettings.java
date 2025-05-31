@@ -2,11 +2,11 @@ package utils;
 
 public class DifficultySettings {
     public int enemiesDescentRate;
-    public int fireChance;
+    public float fireChance;
     public int playersFireInterval;
     public boolean towerDefenseMode;
 
-    private DifficultySettings(int enemiesDescentRate, int fireChance,
+    private DifficultySettings(int enemiesDescentRate, float fireChance,
                                int playersFireInterval, boolean towerDefenseMode) {
         this.enemiesDescentRate = enemiesDescentRate;
         this.fireChance = fireChance;
@@ -16,6 +16,6 @@ public class DifficultySettings {
 
     public static DifficultySettings easySettings() {
         return new DifficultySettings(
-                5, 5, 300,false);
+                5, 0.002f, 150,false);
     }
 }

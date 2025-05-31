@@ -43,4 +43,9 @@ public class GameRenderer {
         g2d.setColor(Constants.PLAYERS_MISSILE_COLOR);
         g2d.fillRect(missile.getX(), missile.getY(), 4, 14);
     }
+
+    public void paintEnemyMissile(Graphics2D g2d, EnemyMissile missile) {
+        g2d.setColor(Constants.UFO_COLOR);
+        g2d.fillRect(missile.getX(), missile.getY(), 4 , 14);
+    }
 }

@@ -28,6 +28,8 @@ public class GameController {
             }
             model.update();
             view.repaintGamePanel();
+            view.getScorePanel().update();
+            view.getHealthPanel().update();
         });
 
 
