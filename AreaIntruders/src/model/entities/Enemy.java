@@ -46,7 +46,9 @@ public abstract class Enemy {
     }
 
     public void setX(int x) {
+
         this.x = x;
+        this.floatX = x;
     }
 
     public int getY() {
@@ -69,7 +71,11 @@ public abstract class Enemy {
         return speed;
     }
 
-    public void setSpeed(int speed) {
+    public void setSpeed(float speed) {
         this.speed = speed;
+    }
+
+    public float getFloatX() {
+        return floatX;
     }
 }

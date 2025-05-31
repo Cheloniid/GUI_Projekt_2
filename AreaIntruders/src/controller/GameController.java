@@ -13,6 +13,9 @@ public class GameController {
     private final MainFrame view;
     private final Timer gameTimer;
     private final Set<Integer> pressedKeys;
+    private int frames;
+    private long start;
+    private long end;
 
     public GameController(GameModel model, MainFrame view) {
         this.model = model;
@@ -20,6 +23,8 @@ public class GameController {
         pressedKeys = new HashSet<>();
 
         gameTimer = new Timer(1000 / 60, e -> {
+            frames++;
+
             if (pressedKeys.contains(KeyEvent.VK_LEFT)){
                 moveLeft();
             }

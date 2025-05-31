@@ -14,7 +14,7 @@ public class GameRenderer {
         } else if (enemy instanceof LargeEnemy) {
             sizeFactor = Constants.LARGE_ENEMY_SIZE;
         }
-        int x = enemy.getX();
+        int x = (int) enemy.getFloatX();
         int y = enemy.getY();
         int width = (int) (sizeFactor * 40);
         int height = (int) (sizeFactor * 10);
