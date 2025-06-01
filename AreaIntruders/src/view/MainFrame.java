@@ -2,17 +2,15 @@ package view;
 
 import controller.GameController;
 import model.GameModel;
+import utils.Constants;
+import utils.DifficultySettings;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.Map;
-import java.util.Set;
+import java.awt.event.*;
 
 public class MainFrame extends JFrame {
-    private final GameModel model;
+    private GameModel model;
     private GameController controller;
     private final GamePanel gamePanel;
     private final ControlPanel controlPanel;
@@ -34,6 +32,8 @@ public class MainFrame extends JFrame {
         bottomPanel.add(scorePanel);
         add(gamePanel, BorderLayout.CENTER);
         add(bottomPanel, BorderLayout.SOUTH);
+
+        setJMenuBar(createMenuBar());
 
 
         for (JButton button : controlPanel.getButtons()){
@@ -69,6 +69,95 @@ public class MainFrame extends JFrame {
         setVisible(true);
     }
 
+    private JMenuBar createMenuBar(){
+        JMenuBar menuBar = new JMenuBar();
+        menuBar.setOpaque(true);
+        menuBar.setBackground(Constants.UFO_WINDOW_COLOR);
+
+        /// Game Menu
+        JMenu gameMenu = new JMenu("Game");
+        gameMenu.setBackground(Constants.UFO_WINDOW_COLOR);
+
+        JMenuItem newGameItem = new JMenuItem("New Game");
+        newGameItem.setBackground(Constants.UFO_WINDOW_COLOR);
+        JMenuItem pauseItem = new JMenuItem("Pause");
+        pauseItem.setBackground(Constants.UFO_WINDOW_COLOR);
+        JMenuItem exitItem = new JMenuItem("Exit");
+        exitItem.setBackground(Constants.UFO_WINDOW_COLOR);
+
+        newGameItem.addActionListener(e -> {
+            controller.startNewGame();
+        });
+        pauseItem.addActionListener(e -> {
+           controller.pauseResumeGame();
+        });
+        exitItem.addActionListener((e) -> {
+            System.exit(0);
+        });
+
+        gameMenu.setMnemonic(KeyEvent.VK_G);
+        newGameItem.setMnemonic(KeyEvent.VK_N);
+        newGameItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_DOWN_MASK));
+        pauseItem.setMnemonic(KeyEvent.VK_P);
+        pauseItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, InputEvent.CTRL_DOWN_MASK));
+        exitItem.setMnemonic(KeyEvent.VK_X);
+        exitItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X, InputEvent.CTRL_DOWN_MASK));
+
+
+
+        gameMenu.add(newGameItem);
+        gameMenu.add(pauseItem);
+        gameMenu.addSeparator();
+        gameMenu.add(exitItem);
+        menuBar.add(gameMenu);
+
+        ///  Difficulty
+        JMenu difficultyMenu = new JMenu("Difficulty");
+
+        JRadioButtonMenuItem easyItem = new JRadioButtonMenuItem("Easy");
+        easyItem.setBackground(Constants.UFO_WINDOW_COLOR);
+        easyItem.addActionListener(e -> {
+            model.changeDifficulty(DifficultySettings.easySettings());
+            controller.startNewGame();
+        });
+        JRadioButtonMenuItem normalItem = new JRadioButtonMenuItem("Normal");
+        normalItem.setBackground(Constants.UFO_WINDOW_COLOR);
+        normalItem.addActionListener(e -> {
+            model.changeDifficulty(DifficultySettings.normalSettings());
+            controller.startNewGame();
+        });
+
+
+        ButtonGroup diffGroup = new ButtonGroup();
+        diffGroup.add(easyItem);
+        diffGroup.add(normalItem);
+        normalItem.setSelected(true);
+
+        difficultyMenu.add(easyItem);
+        difficultyMenu.add(normalItem);
+
+        menuBar.add(difficultyMenu);
+
+
+        ///  Top scores
+        JMenu topScoresMenu = new JMenu("Top Scores");
+        JMenuItem showTopScores = new JMenuItem("Show Top Scores");
+        showTopScores.setBackground(Constants.UFO_WINDOW_COLOR);
+        topScoresMenu.add(showTopScores);
+        menuBar.add(topScoresMenu);
+
+        topScoresMenu.setMnemonic(KeyEvent.VK_O);
+        showTopScores.setMnemonic(KeyEvent.VK_S);
+
+        return menuBar;
+    }
+
+    public void showEndGameMsg(int score){
+        JOptionPane.showMessageDialog(gamePanel,
+                "Game Over!\nYou scored " + score + " points.",
+                "Game Over", JOptionPane.INFORMATION_MESSAGE);
+    }
+
     public void repaintGamePanel(){
         this.gamePanel.repaint();
     }
@@ -88,5 +177,9 @@ public class MainFrame extends JFrame {
 
     public ScorePanel getScorePanel() {
         return scorePanel;
+    }
+
+    public void setModel(GameModel model){
+        this.model = model;
     }
 }

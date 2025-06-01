@@ -14,8 +14,9 @@ public class DifficultySettings {
     }
 
     public static DifficultySettings easySettings() {
+        System.out.println("creating easy difficulty settings");
         return new DifficultySettings(
-                0.1f, 0.0005f, 6, false);
+                0.1f, 0.0005f, 5, false);
     }
 
     public static DifficultySettings normalSettings() {
@@ -24,6 +25,7 @@ public class DifficultySettings {
     }
 
     public void increaseDifficulty() {
-        this.fireChance += 0.0005f;
+        this.fireChance += 0.0002f;
+        this.enemiesDescentRate += 0.015f;
     }
 }

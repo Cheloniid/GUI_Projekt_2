@@ -8,10 +8,25 @@ public class Player {
     private int health;
     private int score;
 
-    public Player(int x, int y) {
-        this.x = x;
-        this.y = y;
+    public Player() {
+        this.x = Player.getStartingX();
+        this.y = Player.getStartingY();
         this.health = 100;
+        this.score = 0;
+    }
+
+    public void reset(){
+        this.x = Player.getStartingX();
+        this.y = Player.getStartingY();
+        this.health = 100;
+        this.score = 0;
+    }
+
+    public static int getStartingX(){
+        return Constants.PANEL_WIDTH / 2 - Constants.PLAYER_WIDTH / 2;
+    }
+    public static int getStartingY(){
+        return Constants.PANEL_HEIGHT - Constants.PLAYER_HEIGHT - 20;
     }
 
     public int getX() {
@@ -63,6 +78,16 @@ public class Player {
     }
 
     public void subtractHealth(int hits){
-        this.health -= hits * 10;
+        if (this.health > 0){
+            this.health -= hits * Constants.PLAYER_HEALTH_LOSS_BY_HIT;
+        }
+    }
+
+    public void kill(){
+        this.health = 0;
+    }
+
+    public boolean isDead(){
+        return this.health <= 0;
     }
 }

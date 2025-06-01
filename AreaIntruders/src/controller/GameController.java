@@ -9,10 +9,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class GameController {
-    private final GameModel model;
-    private final MainFrame view;
-    private final Timer gameTimer;
     private final Set<Integer> pressedKeys;
+    private GameModel model;
+    private MainFrame view;
+    private Timer gameTimer;
+    private boolean isGameStarted;
+    private boolean isGamePaused;
+    private boolean isGameOver;
     private int frames;
     private long start;
     private long end;
@@ -21,41 +24,79 @@ public class GameController {
         this.model = model;
         this.view = view;
         pressedKeys = new HashSet<>();
+        isGameStarted = false;
+        isGamePaused = false;
+        isGameOver = false;
 
-        // GAME TIMER //
-        gameTimer = new Timer(1000 / 60, e -> {
-            frames++;
-
-            if (pressedKeys.contains(KeyEvent.VK_LEFT)){
-                moveLeft();
-            }
-            if (pressedKeys.contains(KeyEvent.VK_RIGHT)){
-                moveRight();
-            }
-            model.update();
-            view.repaintGamePanel();
-            view.getScorePanel().update();
-            view.getHealthPanel().update();
-        });
+        startNewGame();
     }
 
-    public void moveRight(){
+    private void onTimer() {
+        if (pressedKeys.contains(KeyEvent.VK_LEFT)) {
+            moveLeft();
+        }
+        if (pressedKeys.contains(KeyEvent.VK_RIGHT)) {
+            moveRight();
+        }
+        model.update();
+        view.repaintGamePanel();
+        view.getScorePanel().update();
+        view.getHealthPanel().update();
+
+        if (model.getPlayer().isDead()){
+            onGameOver();
+        }
+    }
+
+    public void pauseResumeGame() {
+        if (isGameStarted && !isGamePaused && !isGameOver) {
+            isGamePaused = true;
+            gameTimer.stop();
+        } else if (isGameStarted && isGamePaused && !isGameOver) {
+            isGamePaused = false;
+            gameTimer.restart();
+        }
+    }
+
+    public void startNewGame() {
+        model.reset();
+        if (this.gameTimer != null && this.gameTimer.isRunning()){
+            this.gameTimer.stop();
+        }
+        this.gameTimer = new Timer(1000 / 60, e -> {
+            onTimer();
+        });
+        this.gameTimer.start();
+        isGameStarted = true;
+        isGamePaused = false;
+        isGameOver = false;
+    }
+
+    public void onGameOver() {
+        gameTimer.stop();
+        isGameOver = true;
+        isGameStarted = false;
+        isGamePaused = false;
+        view.showEndGameMsg(model.getPlayer().getScore());
+    }
+
+    public void moveRight() {
         model.moveRigth();
     }
 
-    public void moveLeft(){
+    public void moveLeft() {
         model.moveLeft();
     }
 
-    public void fire(){
+    public void fire() {
         model.shootPlayersMissile();
-    }
-
-    public void startGame() {
-        gameTimer.start();
     }
 
     public Set<Integer> getPressedKeys() {
         return pressedKeys;
+    }
+
+    public void setModel(GameModel model) {
+        this.model = model;
     }
 }

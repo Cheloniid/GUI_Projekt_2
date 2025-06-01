@@ -32,6 +32,14 @@ public class GamePanel extends JPanel {
         inputMap = getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
         actionMap = getActionMap();
 
+        inputMap.put(KeyStroke.getKeyStroke("P"), "pressed P");
+        actionMap.put("pressed P", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controller.pauseResumeGame();
+            }
+        });
+
         inputMap.put(KeyStroke.getKeyStroke("pressed LEFT"), "pressed left");
         actionMap.put("pressed left", new AbstractAction() {
             @Override

@@ -46,6 +46,6 @@ public class GameRenderer {
 
     public void paintEnemyMissile(Graphics2D g2d, EnemyMissile missile) {
         g2d.setColor(Constants.UFO_COLOR);
-        g2d.fillRect(missile.getX(), missile.getY(), 4 , 14);
+        g2d.fillOval(missile.getX(), missile.getY(), 4 , 14);
     }
 }

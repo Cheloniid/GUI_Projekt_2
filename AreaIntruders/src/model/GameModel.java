@@ -23,8 +23,7 @@ public class GameModel {
         this.randomGen = new Random();
         difficultySettings = DifficultySettings.normalSettings();
 
-        player = new Player(Constants.PANEL_WIDTH / 2 - Constants.PLAYER_WIDTH / 2,
-                Constants.PANEL_HEIGHT - Constants.PLAYER_HEIGHT - 20);
+        player = new Player();
 
         enemies = new ArrayList<>();
         generateEnemies(enemies);
@@ -47,6 +46,10 @@ public class GameModel {
             player.subtractHealth(playerHitDetector.getNumberOfHits());
         }
 
+        if (checkPlayerEnemyCollision(player, enemies)) {
+            player.kill();
+        }
+
         if (Constants.SHOOT_ENEMY_MISSILES) {
             for (Enemy enemy : enemies) {
                 if (randomGen.nextDouble() < difficultySettings.fireChance) {
@@ -59,6 +62,26 @@ public class GameModel {
             generateEnemies(enemies);
             difficultySettings.increaseDifficulty();
         }
+    }
+
+    public void reset(){
+        difficultySettings = DifficultySettings.normalSettings();
+
+        player.reset();
+
+        enemies = new ArrayList<>();
+        generateEnemies(enemies);
+
+        playerMissiles = new ArrayList<>();
+        enemyMissiles = new ArrayList<>();
+        lastPlayersMissileStart = 0;
+
+        enemyHitDetector = new EnemyHitDetector(playerMissiles, enemies);
+        playerHitDetector = new PlayerHitDetector(player, enemyMissiles);
+    }
+
+    public void changeDifficulty(DifficultySettings difficultySettings) {
+        this.difficultySettings = difficultySettings;
     }
 
     public void generateEnemies(List<Enemy> enemies) {
@@ -85,6 +108,17 @@ public class GameModel {
                 new EnemyMissile(
                         enemy.getX() + (int) Constants.SMALL_ENEMY_SIZE * 20,
                         enemy.getY() + (int) Constants.SMALL_ENEMY_SIZE * 10));
+    }
+
+    private boolean checkPlayerEnemyCollision(Player player, ArrayList<Enemy> enemies){
+        if (enemies.isEmpty()) {
+            return false;
+        }
+        Enemy lastEnemy = enemies.getLast();
+        if (lastEnemy.getY() + 10 >= player.getY()) {
+            return true;
+        }
+        return false;
     }
 
     public Player getPlayer() {
