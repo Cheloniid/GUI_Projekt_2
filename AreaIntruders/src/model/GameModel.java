@@ -2,6 +2,7 @@ package model;
 
 import model.entities.*;
 import utils.Constants;
+import utils.Difficulty;
 import utils.DifficultySettings;
 
 import java.util.ArrayList;
@@ -65,7 +66,11 @@ public class GameModel {
     }
 
     public void reset(){
-        difficultySettings = DifficultySettings.normalSettings();
+        if (difficultySettings.description == Difficulty.EASY){
+            difficultySettings = DifficultySettings.easySettings();
+        } else if (difficultySettings.description == Difficulty.NORMAL){
+            difficultySettings = DifficultySettings.normalSettings();
+        }
 
         player.reset();
 
@@ -81,6 +86,7 @@ public class GameModel {
     }
 
     public void changeDifficulty(DifficultySettings difficultySettings) {
+        System.out.println("changeDifficulty");
         this.difficultySettings = difficultySettings;
     }
 

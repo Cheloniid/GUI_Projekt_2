@@ -4,24 +4,27 @@ public class DifficultySettings {
     public float enemiesDescentRate;
     public float fireChance;
     public int enemyColumns;
+    public Difficulty description;
     public boolean towerDefenseMode;
 
-    private DifficultySettings(float enemiesDescentRate, float fireChance, int enemyColumns, boolean towerDefenseMode) {
+    private DifficultySettings(float enemiesDescentRate, float fireChance, int enemyColumns,
+                               Difficulty description, boolean towerDefenseMode) {
         this.enemiesDescentRate = enemiesDescentRate;
         this.fireChance = fireChance;
         this.enemyColumns = enemyColumns;
+        this.description = description;
         this.towerDefenseMode = towerDefenseMode;
     }
 
     public static DifficultySettings easySettings() {
-        System.out.println("creating easy difficulty settings");
+
         return new DifficultySettings(
-                0.1f, 0.0005f, 5, false);
+                0.1f, 0.0005f, 5, Difficulty.EASY, false);
     }
 
     public static DifficultySettings normalSettings() {
         return new DifficultySettings(
-                0.2f, 0.0005f, 8,false);
+                0.2f, 0.0005f, 8, Difficulty.NORMAL, false);
     }
 
     public void increaseDifficulty() {
@@ -29,3 +32,5 @@ public class DifficultySettings {
         this.enemiesDescentRate += 0.015f;
     }
 }
+
+

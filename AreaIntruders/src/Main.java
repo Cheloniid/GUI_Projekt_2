@@ -33,7 +33,7 @@ public class Main {
 // 5 nowa gra menu
 // TODO 6 top 10 nowe okno
 // TODO 7 menu pomoc/zasady gry
-// TODO poziom trudności w menu
+// poziom trudności w menu
 // TODO zapis top 10 do pliku
 // TODO dodawanie topscore przy exit i newgame
 // rzędy wrogów

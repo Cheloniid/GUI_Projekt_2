@@ -103,8 +103,6 @@ public class MainFrame extends JFrame {
         exitItem.setMnemonic(KeyEvent.VK_X);
         exitItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X, InputEvent.CTRL_DOWN_MASK));
 
-
-
         gameMenu.add(newGameItem);
         gameMenu.add(pauseItem);
         gameMenu.addSeparator();
@@ -148,6 +146,16 @@ public class MainFrame extends JFrame {
 
         topScoresMenu.setMnemonic(KeyEvent.VK_O);
         showTopScores.setMnemonic(KeyEvent.VK_S);
+
+        ///  Help ///
+        JMenu helpMenu = new JMenu("Help");
+        JMenuItem instructionsItem = new JMenuItem("Instructions");
+        instructionsItem.setBackground(Constants.UFO_WINDOW_COLOR);
+        instructionsItem.addActionListener(e -> {
+            System.out.println("Instructions Please!");
+        });
+        helpMenu.add(instructionsItem);
+        menuBar.add(helpMenu);
 
         return menuBar;
     }
