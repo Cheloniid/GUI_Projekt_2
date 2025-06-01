@@ -7,15 +7,19 @@ public abstract class Enemy {
     private int x;
     private int y;
     private float floatX;
+    private float floatY;
     private int startingX;
     private Direction direction;
     private float speed;
+    private float descentRate;
 
-    public Enemy(int x, int y) {
+    public Enemy(int x, int y, float descentRate) {
         this.x = x;
         this.floatX = x;
         this.startingX = x;
+        this.floatY = y;
         this.y = y;
+        this.descentRate = descentRate;
         // Zawsze zaczyna się poruszać w lewo
         this.direction = Direction.LEFT;
         this.speed = Constants.ENEMY_SPEED;
@@ -30,7 +34,11 @@ public abstract class Enemy {
         if (floatX < startingX - Constants.ENEMY_HORIZONTAL_RANGE || floatX > startingX){
             changeDirection();
         }
+
+        this.floatY += descentRate;
+
         x = (int) floatX;
+        y = (int) floatY;
     }
 
     private void changeDirection() {

@@ -66,7 +66,9 @@ public class GameModel {
             for (int col = 0; col < difficultySettings.enemyColumns; col++) {
                 enemies.add(new SmallEnemy(
                         Constants.ENEMY_HORIZONTAL_RANGE + 20 + col * Constants.GAP_BETWEEN_ENEMY_COLUMNS,
-                        50 + row * Constants.GAP_BETWEEN_ENEMY_ROWS));
+                        50 + row * Constants.GAP_BETWEEN_ENEMY_ROWS,
+                                difficultySettings.enemiesDescentRate)
+                            );
             }
         }
     }
