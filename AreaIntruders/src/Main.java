@@ -40,15 +40,17 @@ public class Main {
 // strzelanie spacją
 // strzelanie JButtonem
 // 1 ekran startowy ze zdjęciem i progressbarem
-// TODO 2 optionPane do nicka
-// TODO 3 zaczyna się gra
+// optionPane do nicka
+// zaczyna się gra
 // 4 pauza P + menu
 // 5 nowa gra menu
 // TODO 6 top 10 nowe okno
+// TODO wczytywanie top10 z pliku, jeżeli serwer niedostępny
 // 7 menu pomoc/zasady gry
 // poziom trudności w menu
 // TODO zapis top 10 do pliku
 // TODO dodawanie topscore przy exit i newgame
+// TODO zapisywanie nieudanego wprowadzenia nicka na serwer
 // rzędy wrogów
 // poruszanie wrogów
 // opadanie wrogów
@@ -58,7 +60,7 @@ public class Main {
 // TODO 2 okna
 // 4 layouty
 // 3 layouty w jednym jframe
-// TODO streamy
+// streamy
 // TODO interfejsy
 // TODO targetpractice/ tower defense
 // watki

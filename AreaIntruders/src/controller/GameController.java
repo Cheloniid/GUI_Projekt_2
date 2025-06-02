@@ -2,6 +2,7 @@ package controller;
 
 import model.GameModel;
 import view.MainFrame;
+import view.NicknameDialog;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;
@@ -16,9 +17,8 @@ public class GameController {
     private boolean isGameStarted;
     private boolean isGamePaused;
     private boolean isGameOver;
-    private int frames;
-    private long start;
-    private long end;
+    private String playerName;
+
 
     public GameController(GameModel model, MainFrame view) {
         this.model = model;
@@ -28,7 +28,11 @@ public class GameController {
         isGamePaused = false;
         isGameOver = false;
 
-        view.showNickInputDialog(view, this);
+        do {
+            playerName = NicknameDialog.show(view, "Enter your nickname:", "Nickname");
+        } while (playerName.length() == 0 || !NickValidator.validate(playerName));
+        System.out.println(playerName);
+
         view.showInstructionsDialog(view, this, "Start Game");
         startNewGame();
     }

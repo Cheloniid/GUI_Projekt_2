@@ -8,6 +8,7 @@ public class Player {
     private int health;
     private int score;
     private int level;
+    private String name;
 
 
     public Player() {
@@ -47,6 +48,10 @@ public class Player {
 
     public void setY(int y) {
         this.y = y;
+    }
+
+    public void setName(String name){
+        this.name = name;
     }
 
     public void moveRight() {

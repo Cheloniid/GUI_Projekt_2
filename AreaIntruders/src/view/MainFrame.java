@@ -18,6 +18,17 @@ public class MainFrame extends JFrame {
     private final ScorePanel scorePanel;
 
     public MainFrame(GameModel model) {
+        UIManager.put("OptionPane.background", Constants.UFO_WINDOW_COLOR);
+        UIManager.put("Panel.background", Constants.UFO_WINDOW_COLOR);
+        UIManager.put("TextField.background", Color.WHITE);
+        UIManager.put("OptionPane.messageFont", new Font("Monospaced", Font.PLAIN, 14));
+        UIManager.put("OptionPane.messageForeground", Constants.GAME_PANEL_BACKGROUND);
+        UIManager.put("Button.background", Constants.GAME_PANEL_BACKGROUND);
+        UIManager.put("Button.foreground", Color.WHITE);
+        UIManager.put("TextField.foreground", Constants.GAME_PANEL_BACKGROUND);
+//        UIManager.put("TextField.caretForeground", Color.GREEN);
+
+
         this.model = model;
 
         gamePanel = new GamePanel(model);
@@ -174,11 +185,6 @@ public class MainFrame extends JFrame {
     public void showInstructionsDialog(JFrame frame, GameController controller, String buttonText){
         InstructionsDialog instructionsDialog = new InstructionsDialog(frame, controller, buttonText);
         instructionsDialog.setVisible(true);
-    }
-
-    public void showNickInputDialog(JFrame frame, GameController controller){
-        JOptionPane.showInputDialog(
-                frame, "Enter your nickname", "Nickname", JOptionPane.PLAIN_MESSAGE);
     }
 
     public void setController(GameController controller) {
