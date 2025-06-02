@@ -7,12 +7,15 @@ public class Player {
     private int y;
     private int health;
     private int score;
+    private int level;
+
 
     public Player() {
         this.x = Player.getStartingX();
         this.y = Player.getStartingY();
         this.health = 100;
         this.score = 0;
+        this.level = 1;
     }
 
     public void reset(){
@@ -20,6 +23,7 @@ public class Player {
         this.y = Player.getStartingY();
         this.health = 100;
         this.score = 0;
+        this.level = 1;
     }
 
     public static int getStartingX(){
@@ -74,7 +78,7 @@ public class Player {
     }
 
     public void addScore(int score) {
-        this.score += score * 10;
+        this.score += score * 10 * level;
     }
 
     public void subtractHealth(int hits){
@@ -89,5 +93,13 @@ public class Player {
 
     public boolean isDead(){
         return this.health <= 0;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void levelUp(){
+        this.level++;
     }
 }

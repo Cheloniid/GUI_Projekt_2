@@ -48,4 +48,10 @@ public class GameRenderer {
         g2d.setColor(Constants.UFO_COLOR);
         g2d.fillOval(missile.getX(), missile.getY(), 4 , 14);
     }
+
+    public void paintLevelText(Graphics2D g2d, int level) {
+        g2d.setColor(Constants.UFO_WINDOW_COLOR);
+        g2d.setFont(new Font("Monospaced", Font.BOLD, 30));
+        g2d.drawString("LEVEL " + level, 20, 33);
+    }
 }

@@ -99,6 +99,8 @@ public class GamePanel extends JPanel {
         for (EnemyMissile missile : model.getEnemyMissiles()){
             renderer.paintEnemyMissile(g2d, missile);
         }
+
+        renderer.paintLevelText(g2d, model.getPlayer().getLevel());
     }
 
     public void setController(GameController controller) {

@@ -62,6 +62,7 @@ public class GameModel {
         if (enemies.isEmpty()) {
             generateEnemies(enemies);
             difficultySettings.increaseDifficulty();
+            player.levelUp();
         }
     }
 

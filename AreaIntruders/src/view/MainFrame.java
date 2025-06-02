@@ -152,7 +152,8 @@ public class MainFrame extends JFrame {
         JMenuItem instructionsItem = new JMenuItem("Instructions");
         instructionsItem.setBackground(Constants.UFO_WINDOW_COLOR);
         instructionsItem.addActionListener(e -> {
-            System.out.println("Instructions Please!");
+            controller.pauseResumeGame();
+            showInstructionsDialog(this, controller, "Close");
         });
         helpMenu.add(instructionsItem);
         menuBar.add(helpMenu);
@@ -168,6 +169,11 @@ public class MainFrame extends JFrame {
 
     public void repaintGamePanel(){
         this.gamePanel.repaint();
+    }
+
+    public void showInstructionsDialog(JFrame frame, GameController controller, String buttonText){
+        InstructionsDialog instructionsDialog = new InstructionsDialog(frame, controller, buttonText);
+        instructionsDialog.setVisible(true);
     }
 
     public void setController(GameController controller) {

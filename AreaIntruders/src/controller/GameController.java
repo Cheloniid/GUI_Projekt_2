@@ -28,6 +28,7 @@ public class GameController {
         isGamePaused = false;
         isGameOver = false;
 
+        view.showInstructionsDialog(view, this, "Start Game");
         startNewGame();
     }
 
@@ -60,6 +61,7 @@ public class GameController {
 
     public void startNewGame() {
         model.reset();
+        pressedKeys.clear();
         if (this.gameTimer != null && this.gameTimer.isRunning()){
             this.gameTimer.stop();
         }
