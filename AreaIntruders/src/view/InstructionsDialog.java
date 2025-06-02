@@ -5,6 +5,7 @@ import utils.Constants;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 
 public class InstructionsDialog extends JDialog {
 
@@ -36,6 +37,8 @@ public class InstructionsDialog extends JDialog {
             controller.pauseResumeGame();
             dispose();
         });
+
+        getRootPane().setDefaultButton(closeButton);
 
         panel.add(closeButton, BorderLayout.SOUTH);
         panel.add(textArea, BorderLayout.CENTER);

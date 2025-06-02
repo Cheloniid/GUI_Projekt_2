@@ -11,6 +11,7 @@ public class Constants {
 
     public static final int PANEL_HEIGHT = 600;
     public static final int PANEL_WIDTH = 800;
+    public static final String SPLASH_SCREEN_PICTURE = "/UFO_name_50.png";
 
     public static final boolean SHOOT_ENEMY_MISSILES = true;
     public static final boolean DETECT_COLLISIONS_WITH_ENEMY = true;

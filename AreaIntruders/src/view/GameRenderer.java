@@ -54,4 +54,28 @@ public class GameRenderer {
         g2d.setFont(new Font("Monospaced", Font.BOLD, 30));
         g2d.drawString("LEVEL " + level, 20, 33);
     }
+
+    public void paintSplashScreen(Graphics2D g2d){
+        float sizeFactor = 10;
+
+        g2d.setColor(Constants.UFO_WINDOW_COLOR);
+        g2d.setFont(new Font("Monospaced", Font.BOLD, 36));
+        g2d.drawString("Area Intruders", 105, 150);
+
+        int x = 60;
+        int y = 220;
+        int width = (int) (sizeFactor * 40);
+        int height = (int) (sizeFactor * 10);
+
+        g2d.setColor(Color.WHITE);
+        g2d.fillOval(x, y + (int) sizeFactor, width, height);
+
+        g2d.setColor(Constants.UFO_COLOR);
+        g2d.fillOval(x, y, width, height);
+
+        g2d.setColor(Constants.UFO_WINDOW_COLOR);
+        g2d.fillOval(x + (int) (0.2 * width), y - (int) (0.15 * height),
+                (int) (0.6 * width), (int) ( 0.6 * height));
+    }
+
 }

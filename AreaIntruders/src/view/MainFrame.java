@@ -176,6 +176,11 @@ public class MainFrame extends JFrame {
         instructionsDialog.setVisible(true);
     }
 
+    public void showNickInputDialog(JFrame frame, GameController controller){
+        JOptionPane.showInputDialog(
+                frame, "Enter your nickname", "Nickname", JOptionPane.PLAIN_MESSAGE);
+    }
+
     public void setController(GameController controller) {
         this.controller = controller;
         this.gamePanel.setController(controller);

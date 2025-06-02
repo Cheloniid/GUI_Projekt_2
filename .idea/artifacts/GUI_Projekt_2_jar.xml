@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="GUI_Projekt_2:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/GUI_Projekt_2_jar</output-path>
+    <root id="archive" name="GUI_Projekt_2.jar">
+      <element id="module-output" name="GUI_Projekt_2" />
+      <element id="module-output" name="AreaIntruders" />
+    </root>
+  </artifact>
+</component>

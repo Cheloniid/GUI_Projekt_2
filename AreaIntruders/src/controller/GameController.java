@@ -28,6 +28,7 @@ public class GameController {
         isGamePaused = false;
         isGameOver = false;
 
+        view.showNickInputDialog(view, this);
         view.showInstructionsDialog(view, this, "Start Game");
         startNewGame();
     }

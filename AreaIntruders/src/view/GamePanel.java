@@ -90,6 +90,7 @@ public class GamePanel extends JPanel {
                 RenderingHints.VALUE_ANTIALIAS_ON);
 
         renderer.paintPlayer(g2d, model.getPlayer());
+
         for (Enemy enemy : model.getEnemies()) {
             renderer.paintUFO(g2d, enemy);
         }
