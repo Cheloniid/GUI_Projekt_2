@@ -4,6 +4,8 @@ import view.MainFrame;
 import view.SplashScreen;
 
 import javax.swing.*;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 public class Main {
     public static void main(String[] args) {
@@ -11,6 +13,7 @@ public class Main {
 
             @Override
             public void run() {
+
                 SplashScreen splashScreen = new SplashScreen();
 
                 Timer mainTimer = new Timer(1000, e -> {
@@ -51,6 +54,7 @@ public class Main {
 // TODO zapis top 10 do pliku
 // TODO dodawanie topscore przy exit i newgame
 // TODO zapisywanie nieudanego wprowadzenia nicka na serwer
+// TODO nick score godzina
 // rzędy wrogów
 // poruszanie wrogów
 // opadanie wrogów
@@ -67,5 +71,15 @@ public class Main {
 
 // TODO server top10
 // TODO pobieranie gry ze strony
-// TODO large enemy
-//  TODO lvle i bonus points
+
+/*
+System.out.println(System.getProperty("user.name"));
+                try {
+                    System.out.println(InetAddress.getLocalHost().getHostName());
+                } catch (UnknownHostException e) {
+                    throw new RuntimeException(e);
+                }
+                System.out.println(System.getProperty("user.dir"));
+                System.out.println(System.getProperty("user.home"));
+                System.out.println(System.getProperty("os.name"));
+ */

@@ -29,7 +29,10 @@ public class GameController {
         isGameOver = false;
 
         do {
-            playerName = NicknameDialog.show(view, "Enter your nickname:", "Nickname");
+            playerName = NicknameDialog.show(
+                    view,
+                    "Enter your nickname.\n\nIt will be sent along with your score\n" +
+                            "and basic system info to the game server.\n\n", "Nickname");
         } while (playerName.length() == 0 || !NickValidator.validate(playerName));
         System.out.println(playerName);
 
