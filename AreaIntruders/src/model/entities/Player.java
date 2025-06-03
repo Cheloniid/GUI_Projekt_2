@@ -17,6 +17,7 @@ public class Player {
         this.health = 100;
         this.score = 0;
         this.level = 1;
+
     }
 
     public void reset(){
@@ -106,5 +107,9 @@ public class Player {
 
     public void levelUp(){
         this.level++;
+    }
+
+    public String getName() {
+        return name;
     }
 }

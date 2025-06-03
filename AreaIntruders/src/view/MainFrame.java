@@ -25,7 +25,7 @@ public class MainFrame extends JFrame {
         UIManager.put("OptionPane.messageForeground", Constants.GAME_PANEL_BACKGROUND);
         UIManager.put("Button.background", Constants.GAME_PANEL_BACKGROUND);
         UIManager.put("Button.foreground", Color.WHITE);
-        UIManager.put("TextField.foreground", Constants.GAME_PANEL_BACKGROUND);
+        UIManager.put("TextField.foreground", Color.BLACK);
 //        UIManager.put("TextField.caretForeground", Color.GREEN);
 
 

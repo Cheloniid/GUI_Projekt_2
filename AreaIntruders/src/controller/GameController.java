@@ -1,6 +1,8 @@
 package controller;
 
+import model.DataToUpload;
 import model.GameModel;
+import utils.*;
 import view.MainFrame;
 import view.NicknameDialog;
 
@@ -33,8 +35,9 @@ public class GameController {
                     view,
                     "Enter your nickname.\n\nIt will be sent along with your score\n" +
                             "and basic system info to the game server.\n\n", "Nickname");
-        } while (playerName.length() == 0 || !NickValidator.validate(playerName));
-        System.out.println(playerName);
+        } while (playerName.isEmpty() || playerName.length() > 20 || !NickValidator.validate(playerName));
+
+        model.getPlayer().setName(playerName);
 
         view.showInstructionsDialog(view, this, "Start Game");
         startNewGame();
@@ -65,6 +68,13 @@ public class GameController {
             isGamePaused = false;
             gameTimer.restart();
         }
+
+        if (Constants.DEBUG_MODE && isGamePaused){
+            DataUploader.uploadData(JSONConverter.toJSON(new DataToUpload(model.getPlayer())));
+            DataFetcher.fetchData();
+        }
+
+
     }
 
     public void startNewGame() {
@@ -87,6 +97,8 @@ public class GameController {
         isGameOver = true;
         isGameStarted = false;
         isGamePaused = false;
+
+        DataUploader.uploadData(JSONConverter.toJSON(new DataToUpload(model.getPlayer())));
         view.showEndGameMsg(model.getPlayer().getScore());
     }
 

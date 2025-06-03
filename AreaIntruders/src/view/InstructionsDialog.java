@@ -27,7 +27,8 @@ public class InstructionsDialog extends JDialog {
         textArea.setEditable(false);
         textArea.setLineWrap(true);
         textArea.setWrapStyleWord(true);
-        textArea.setFont(new Font("Monospaced", Font.PLAIN, 12));
+        textArea.setForeground(Constants.GAME_PANEL_BACKGROUND);
+        textArea.setFont(new Font("Monospaced", Font.PLAIN, 14));
         textArea.setBackground(Constants.UFO_WINDOW_COLOR);
 
         JPanel panel = new JPanel(new BorderLayout());

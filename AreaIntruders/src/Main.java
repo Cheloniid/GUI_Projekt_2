@@ -6,6 +6,8 @@ import view.SplashScreen;
 import javax.swing.*;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Main {
     public static void main(String[] args) {
@@ -49,6 +51,7 @@ public class Main {
 // 5 nowa gra menu
 // TODO 6 top 10 nowe okno
 // TODO wczytywanie top10 z pliku, jeżeli serwer niedostępny
+// TODO zapisywanie topscore offline, jeżeli nie ma potwierdzenia z serwera o zapisaniu
 // 7 menu pomoc/zasady gry
 // poziom trudności w menu
 // TODO zapis top 10 do pliku

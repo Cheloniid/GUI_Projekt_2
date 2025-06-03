@@ -3,6 +3,9 @@ package utils;
 import java.awt.*;
 
 public class Constants {
+    public static final String UPLOAD_ENDPOINT = "http://localhost:5000/upload";
+    public static final String DOWNLOAD_ENDPOINT = "http://localhost:5000/get-top-10";
+
     public static final Color GAME_PANEL_BACKGROUND = new Color(70, 53, 177);
     public static final Color PLAYER_COLOR = new Color(174, 234, 148);;
     public static final Color PLAYERS_MISSILE_COLOR = new Color(174, 234, 148);
@@ -13,6 +16,7 @@ public class Constants {
     public static final int PANEL_WIDTH = 800;
     public static final String SPLASH_SCREEN_PICTURE = "/UFO_name_50.png";
 
+    public static final boolean DEBUG_MODE = true;
     public static final boolean SHOOT_ENEMY_MISSILES = true;
     public static final boolean DETECT_COLLISIONS_WITH_ENEMY = true;
     public static final boolean DETECT_COLLISIONS_WITH_PLAYER = true;
