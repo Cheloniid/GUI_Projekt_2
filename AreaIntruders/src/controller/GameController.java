@@ -78,7 +78,7 @@ public class GameController {
     }
 
     public void startNewGame() {
-        if (isGameStarted) {
+        if (isGameStarted || isGameOver) {
             DataUploader.uploadData(JSONConverter.toJSON(new DataToUpload(model.getPlayer())));
         }
         model.reset();
@@ -101,7 +101,7 @@ public class GameController {
         isGameStarted = false;
         isGamePaused = false;
 
-        DataUploader.uploadData(JSONConverter.toJSON(new DataToUpload(model.getPlayer())));
+        //DataUploader.uploadData(JSONConverter.toJSON(new DataToUpload(model.getPlayer())));
         view.showEndGameMsg(model.getPlayer().getScore());
     }
 

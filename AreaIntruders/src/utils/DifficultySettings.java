@@ -29,7 +29,7 @@ public class DifficultySettings {
 
     public void increaseDifficulty() {
         this.fireChance += 0.0002f;
-        this.enemiesDescentRate += 0.015f;
+        this.enemiesDescentRate += 0.012f;
     }
 }
 
