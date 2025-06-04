@@ -1,21 +1,24 @@
 package view;
 
 import controller.GameController;
+import model.DataToUpload;
 import model.GameModel;
 import utils.Constants;
+import utils.DataUploader;
 import utils.DifficultySettings;
+import utils.JSONConverter;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
 public class MainFrame extends JFrame {
-    private GameModel model;
-    private GameController controller;
     private final GamePanel gamePanel;
     private final ControlPanel controlPanel;
     private final HealthPanel healthPanel;
     private final ScorePanel scorePanel;
+    private GameModel model;
+    private GameController controller;
 
     public MainFrame(GameModel model) {
         UIManager.put("OptionPane.background", Constants.UFO_WINDOW_COLOR);
@@ -47,24 +50,25 @@ public class MainFrame extends JFrame {
         setJMenuBar(createMenuBar());
 
 
-        for (JButton button : controlPanel.getButtons()){
+        for (JButton button : controlPanel.getButtons()) {
             button.addMouseListener(new MouseAdapter() {
                 @Override
-                public void mousePressed(MouseEvent e){
-                    if (button.getText().equals("LEFT")){
+                public void mousePressed(MouseEvent e) {
+                    if (button.getText().equals("LEFT")) {
                         controller.getPressedKeys().add(KeyEvent.VK_LEFT);
-                    } else if (button.getText().equals("RIGHT")){
+                    } else if (button.getText().equals("RIGHT")) {
                         controller.getPressedKeys().add(KeyEvent.VK_RIGHT);
-                    } else if (button.getText().equals("FIRE!")){
+                    } else if (button.getText().equals("FIRE!")) {
                         controller.fire();
                     }
                 }
-                public void mouseReleased(MouseEvent e){
-                    if (button.getText().equals("LEFT")){
+
+                public void mouseReleased(MouseEvent e) {
+                    if (button.getText().equals("LEFT")) {
                         controller.getPressedKeys().remove(KeyEvent.VK_LEFT);
-                    } else if (button.getText().equals("RIGHT")){
+                    } else if (button.getText().equals("RIGHT")) {
                         controller.getPressedKeys().remove(KeyEvent.VK_RIGHT);
-                    } else if (button.getText().equals("FIRE!")){
+                    } else if (button.getText().equals("FIRE!")) {
                         controller.getPressedKeys().remove(KeyEvent.VK_SPACE);
                     }
                 }
@@ -74,13 +78,21 @@ public class MainFrame extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Area Intruders");
 
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                super.windowClosing(e);
+                DataUploader.uploadData(JSONConverter.toJSON(new DataToUpload(model.getPlayer())));
+            }
+        });
+
         pack();
         setResizable(false);
         setLocationRelativeTo(null);
         setVisible(true);
     }
 
-    private JMenuBar createMenuBar(){
+    private JMenuBar createMenuBar() {
         JMenuBar menuBar = new JMenuBar();
         menuBar.setOpaque(true);
         menuBar.setBackground(Constants.UFO_WINDOW_COLOR);
@@ -100,7 +112,7 @@ public class MainFrame extends JFrame {
             controller.startNewGame();
         });
         pauseItem.addActionListener(e -> {
-           controller.pauseResumeGame();
+            controller.pauseResumeGame();
         });
         exitItem.addActionListener((e) -> {
             System.exit(0);
@@ -121,32 +133,33 @@ public class MainFrame extends JFrame {
         menuBar.add(gameMenu);
 
         ///  Difficulty
-        JMenu difficultyMenu = new JMenu("Difficulty");
+        if (Constants.ENABLE_DIFFICULTY_SETTINGS) {
+            JMenu difficultyMenu = new JMenu("Difficulty");
 
-        JRadioButtonMenuItem easyItem = new JRadioButtonMenuItem("Easy");
-        easyItem.setBackground(Constants.UFO_WINDOW_COLOR);
-        easyItem.addActionListener(e -> {
-            model.changeDifficulty(DifficultySettings.easySettings());
-            controller.startNewGame();
-        });
-        JRadioButtonMenuItem normalItem = new JRadioButtonMenuItem("Normal");
-        normalItem.setBackground(Constants.UFO_WINDOW_COLOR);
-        normalItem.addActionListener(e -> {
-            model.changeDifficulty(DifficultySettings.normalSettings());
-            controller.startNewGame();
-        });
+            JRadioButtonMenuItem easyItem = new JRadioButtonMenuItem("Easy");
+            easyItem.setBackground(Constants.UFO_WINDOW_COLOR);
+            easyItem.addActionListener(e -> {
+                model.changeDifficulty(DifficultySettings.easySettings());
+                controller.startNewGame();
+            });
+            JRadioButtonMenuItem normalItem = new JRadioButtonMenuItem("Normal");
+            normalItem.setBackground(Constants.UFO_WINDOW_COLOR);
+            normalItem.addActionListener(e -> {
+                model.changeDifficulty(DifficultySettings.normalSettings());
+                controller.startNewGame();
+            });
 
 
-        ButtonGroup diffGroup = new ButtonGroup();
-        diffGroup.add(easyItem);
-        diffGroup.add(normalItem);
-        normalItem.setSelected(true);
+            ButtonGroup diffGroup = new ButtonGroup();
+            diffGroup.add(easyItem);
+            diffGroup.add(normalItem);
+            normalItem.setSelected(true);
 
-        difficultyMenu.add(easyItem);
-        difficultyMenu.add(normalItem);
+            difficultyMenu.add(easyItem);
+            difficultyMenu.add(normalItem);
 
-        menuBar.add(difficultyMenu);
-
+            menuBar.add(difficultyMenu);
+        }
 
         ///  Top scores
         JMenu topScoresMenu = new JMenu("Top Scores");
@@ -157,6 +170,13 @@ public class MainFrame extends JFrame {
 
         topScoresMenu.setMnemonic(KeyEvent.VK_O);
         showTopScores.setMnemonic(KeyEvent.VK_S);
+
+        showTopScores.addActionListener(e -> {
+            if (controller.isGameStarted() && !controller.isGameOver() && !controller.isGamePaused()) {
+                controller.pauseResumeGame();
+            }
+            new TopScoresFrame(controller);
+        });
 
         ///  Help ///
         JMenu helpMenu = new JMenu("Help");
@@ -172,17 +192,17 @@ public class MainFrame extends JFrame {
         return menuBar;
     }
 
-    public void showEndGameMsg(int score){
+    public void showEndGameMsg(int score) {
         JOptionPane.showMessageDialog(gamePanel,
                 "Game Over!\nYou scored " + score + " points.",
                 "Game Over", JOptionPane.INFORMATION_MESSAGE);
     }
 
-    public void repaintGamePanel(){
+    public void repaintGamePanel() {
         this.gamePanel.repaint();
     }
 
-    public void showInstructionsDialog(JFrame frame, GameController controller, String buttonText){
+    public void showInstructionsDialog(JFrame frame, GameController controller, String buttonText) {
         InstructionsDialog instructionsDialog = new InstructionsDialog(frame, controller, buttonText);
         instructionsDialog.setVisible(true);
     }
@@ -204,7 +224,7 @@ public class MainFrame extends JFrame {
         return scorePanel;
     }
 
-    public void setModel(GameModel model){
+    public void setModel(GameModel model) {
         this.model = model;
     }
 }

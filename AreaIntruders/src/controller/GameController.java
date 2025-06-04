@@ -71,13 +71,16 @@ public class GameController {
 
         if (Constants.DEBUG_MODE && isGamePaused){
             DataUploader.uploadData(JSONConverter.toJSON(new DataToUpload(model.getPlayer())));
-            DataFetcher.fetchData();
+            System.out.println(DataFetcher.fetchData());
         }
 
 
     }
 
     public void startNewGame() {
+        if (isGameStarted) {
+            DataUploader.uploadData(JSONConverter.toJSON(new DataToUpload(model.getPlayer())));
+        }
         model.reset();
         pressedKeys.clear();
         if (this.gameTimer != null && this.gameTimer.isRunning()){
@@ -120,5 +123,17 @@ public class GameController {
 
     public void setModel(GameModel model) {
         this.model = model;
+    }
+
+    public boolean isGameOver() {
+        return isGameOver;
+    }
+
+    public boolean isGamePaused() {
+        return isGamePaused;
+    }
+
+    public boolean isGameStarted() {
+        return isGameStarted;
     }
 }

@@ -87,7 +87,6 @@ public class GameModel {
     }
 
     public void changeDifficulty(DifficultySettings difficultySettings) {
-        System.out.println("changeDifficulty");
         this.difficultySettings = difficultySettings;
     }
 

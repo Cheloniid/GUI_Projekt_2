@@ -59,13 +59,8 @@ public class DataFetcher {
             System.out.println("IO Error Downloading top-scores");
             return topScores;
         }
-        System.out.println(topScores);
         return topScores;
     }
 }
 
-class TopScoreEntry {
-    public int no;
-    public String name;
-    public int score;
-}
+
