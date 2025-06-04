@@ -36,12 +36,16 @@ public class TopScoresFrame extends JFrame {
         model = new TopScoresModel();
         table = new JTable(model);
         JTableHeader header = table.getTableHeader();
-        header.setBackground(Constants.UFO_COLOR);
+        header.setBackground(Constants.GAME_PANEL_BACKGROUND);
         header.setForeground(Color.WHITE);
         header.setFont(new Font("Monospaced", Font.PLAIN, 14));
         table.setFont(new Font("Monospaced", Font.PLAIN, 14));
         table.setBackground(Constants.UFO_WINDOW_COLOR);
 
+        table.setRowSelectionAllowed(false);
+        table.setColumnSelectionAllowed(false);
+        table.setCellSelectionEnabled(false);
+        table.setFocusable(false); // bardzo ważne – nie pozwala na zaznaczenie przez klawiaturę
 
         setLayout(new BorderLayout());
         panel.add(new JScrollPane(table), BorderLayout.CENTER);
@@ -53,6 +57,8 @@ public class TopScoresFrame extends JFrame {
                 closeWindow();
             }
         });
+
+        getRootPane().setDefaultButton(closeButton);
 
         pack();
         setResizable(false);
