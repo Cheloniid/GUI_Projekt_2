@@ -19,6 +19,7 @@ public class GameController {
     private boolean isGameStarted;
     private boolean isGamePaused;
     private boolean isGameOver;
+    private boolean scoresUploaded;
     private String playerName;
 
 
@@ -29,6 +30,7 @@ public class GameController {
         isGameStarted = false;
         isGamePaused = false;
         isGameOver = false;
+        scoresUploaded = false;
 
         do {
             playerName = NicknameDialog.show(
@@ -78,9 +80,11 @@ public class GameController {
     }
 
     public void startNewGame() {
-        if (isGameStarted || isGameOver) {
-            DataUploader.uploadData(JSONConverter.toJSON(new DataToUpload(model.getPlayer())));
+        // Upload scores from the previous game
+        if(isGameStarted) {
+            uploadScores();
         }
+
         model.reset();
         pressedKeys.clear();
         if (this.gameTimer != null && this.gameTimer.isRunning()){
@@ -93,6 +97,7 @@ public class GameController {
         isGameStarted = true;
         isGamePaused = false;
         isGameOver = false;
+        scoresUploaded = false;
     }
 
     public void onGameOver() {
@@ -100,6 +105,8 @@ public class GameController {
         isGameOver = true;
         isGameStarted = false;
         isGamePaused = false;
+
+        uploadScores();
 
         //DataUploader.uploadData(JSONConverter.toJSON(new DataToUpload(model.getPlayer())));
         view.showEndGameMsg(model.getPlayer().getScore());
@@ -135,5 +142,16 @@ public class GameController {
 
     public boolean isGameStarted() {
         return isGameStarted;
+    }
+
+    public void uploadScores(){
+        if (!scoresUploaded){
+            DataUploader.uploadData(JSONConverter.toJSON(new DataToUpload(model.getPlayer())));
+        }
+        scoresUploaded = true;
+    }
+
+    public boolean isScoresUploaded() {
+        return scoresUploaded;
     }
 }

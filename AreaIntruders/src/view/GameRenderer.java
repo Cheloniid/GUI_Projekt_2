@@ -50,7 +50,7 @@ public class GameRenderer {
     }
 
     public void paintLevelText(Graphics2D g2d, int level) {
-        g2d.setColor(Constants.UFO_WINDOW_COLOR);
+        g2d.setColor(Constants.PLAYER_COLOR);
         g2d.setFont(new Font("Monospaced", Font.BOLD, 30));
         g2d.drawString("LEVEL " + level, 20, 33);
     }

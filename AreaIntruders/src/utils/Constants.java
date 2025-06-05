@@ -3,8 +3,11 @@ package utils;
 import java.awt.*;
 
 public class Constants {
+    public static final boolean USE_LOCAL_ENDPOINTS = false;
     public static final String UPLOAD_ENDPOINT = "http://gatewayantares.com:1337/upload";
     public static final String DOWNLOAD_ENDPOINT = "http://gatewayantares.com:1337/get-top-10";
+    public static final String UPLOAD_LOCAL_ENDPOINT = "http://127.0.0.1:5000/upload";
+    public static final String DOWNLOAD_LOCAL_ENDPOINT = "http://127.0.0.1:5000/get-top-10";
 
     public static final Color GAME_PANEL_BACKGROUND = new Color(70, 53, 177);
     public static final Color PLAYER_COLOR = new Color(174, 234, 148);;

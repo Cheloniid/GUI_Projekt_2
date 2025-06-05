@@ -82,7 +82,10 @@ public class MainFrame extends JFrame {
             @Override
             public void windowClosing(WindowEvent e) {
                 super.windowClosing(e);
-                DataUploader.uploadData(JSONConverter.toJSON(new DataToUpload(model.getPlayer())));
+                if(Constants.DEBUG_MODE){
+                    System.out.println("Scores uploaded in window listener: " + controller.isScoresUploaded());
+                }
+                controller.uploadScores();
             }
         });
 
