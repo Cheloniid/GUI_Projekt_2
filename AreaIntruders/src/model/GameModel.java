@@ -91,7 +91,7 @@ public class GameModel {
     }
 
     public void generateEnemies(List<Enemy> enemies) {
-        for (int row = 0; row < Constants.ENEMY_ROWS; row++) {
+        for (int row = 0; row < difficultySettings.enemyRows; row++) {
             for (int col = 0; col < difficultySettings.enemyColumns; col++) {
                 enemies.add(new SmallEnemy(
                         Constants.ENEMY_HORIZONTAL_RANGE + 20 + col * Constants.GAP_BETWEEN_ENEMY_COLUMNS,

@@ -9,6 +9,7 @@ public class NicknameDialog {
 
     public static String show(Component parent, String message, String title) {
         JTextField textField = new JTextField(20);
+        textField.setText(System.getProperty("user.name"));
 
         JOptionPane optionPane = new JOptionPane(
                 new Object[]{message, textField},

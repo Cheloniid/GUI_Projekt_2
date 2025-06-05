@@ -3,8 +3,8 @@ package utils;
 import java.awt.*;
 
 public class Constants {
-    public static final String UPLOAD_ENDPOINT = "http://localhost:5000/upload";
-    public static final String DOWNLOAD_ENDPOINT = "http://localhost:5000/get-top-10";
+    public static final String UPLOAD_ENDPOINT = "http://gatewayantares.com:1337/upload";
+    public static final String DOWNLOAD_ENDPOINT = "http://gatewayantares.com:1337/get-top-10";
 
     public static final Color GAME_PANEL_BACKGROUND = new Color(70, 53, 177);
     public static final Color PLAYER_COLOR = new Color(174, 234, 148);;
@@ -34,7 +34,6 @@ public class Constants {
     public static final float ENEMY_SPEED = 1f;
     public static final float ENEMY_MISSILE_SPEED = 2f;
 
-    public static final int ENEMY_ROWS = 5;
     public static final int GAP_BETWEEN_ENEMY_ROWS = 60;
     public static final int GAP_BETWEEN_ENEMY_COLUMNS = 65;
     public static final int ENEMY_HORIZONTAL_RANGE = (int) (0.3 * PANEL_WIDTH);
