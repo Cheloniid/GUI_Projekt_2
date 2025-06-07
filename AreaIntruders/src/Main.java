@@ -19,8 +19,6 @@ public class Main {
                 SplashScreen splashScreen = new SplashScreen();
 
                 Timer mainTimer = new Timer(1000, e -> {
-
-
                     GameModel model = new GameModel();
                     MainFrame view = new MainFrame(model);
                     GameController controller = new GameController(model, view);
