@@ -12,7 +12,12 @@ public class DataUploader {
         boolean status = true;
 
         try{
-            URL url = new URL(Constants.UPLOAD_ENDPOINT);
+            URL url;
+            if (Constants.USE_LOCAL_ENDPOINTS){
+                url = new URL(Constants.UPLOAD_LOCAL_ENDPOINT);
+            } else {
+                url = new URL(Constants.UPLOAD_ENDPOINT);
+            }
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
             connection.setRequestMethod("POST");

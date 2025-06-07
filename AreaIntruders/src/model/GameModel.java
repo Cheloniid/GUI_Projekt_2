@@ -27,7 +27,11 @@ public class GameModel {
         player = new Player();
 
         enemies = new ArrayList<>();
-        generateEnemies(enemies);
+        if (difficultySettings.targetPractice){
+            generateOneEnemy(enemies);
+        } else {
+            generateEnemies(enemies);
+        }
 
         playerMissiles = new ArrayList<>();
         enemyMissiles = new ArrayList<>();
@@ -36,6 +40,11 @@ public class GameModel {
     }
 
     public void update() {
+        if (difficultySettings.targetPractice){
+            updateTargetPractice();
+            return;
+        }
+
         enemies.stream().forEach(Enemy::move);
         playerMissiles.stream().forEach(PlayerMissile::move);
         enemyMissiles.stream().forEach(EnemyMissile::move);
@@ -66,6 +75,19 @@ public class GameModel {
         }
     }
 
+    public void updateTargetPractice(){
+        enemies.stream().forEach(Enemy::move);
+        playerMissiles.stream().forEach(PlayerMissile::move);
+
+        if (Constants.DETECT_COLLISIONS_WITH_ENEMY) {
+            player.addScore(enemyHitDetector.getNumberOfHits());
+        }
+
+        if (enemies.isEmpty()) {
+            generateOneEnemy(enemies);
+        }
+    }
+
     public void reset(){
         if (difficultySettings.description == Difficulty.EASY){
             difficultySettings = DifficultySettings.easySettings();
@@ -76,7 +98,11 @@ public class GameModel {
         player.reset();
 
         enemies = new ArrayList<>();
-        generateEnemies(enemies);
+        if (difficultySettings.targetPractice){
+            generateOneEnemy(enemies);
+        } else {
+            generateEnemies(enemies);
+        }
 
         playerMissiles = new ArrayList<>();
         enemyMissiles = new ArrayList<>();
@@ -102,11 +128,22 @@ public class GameModel {
         }
     }
 
+    public void generateOneEnemy(List<Enemy> enemies) {
+        int row = randomGen.nextInt(difficultySettings.enemyRows);
+        int col = randomGen.nextInt(difficultySettings.enemyColumns);
+        enemies.add(new SmallEnemy(
+                Constants.ENEMY_HORIZONTAL_RANGE + 20 + col * Constants.GAP_BETWEEN_ENEMY_COLUMNS,
+                50 + row * Constants.GAP_BETWEEN_ENEMY_ROWS,
+                difficultySettings.enemiesDescentRate)
+        );
+    }
+
     public void shootPlayersMissile() {
         if (System.currentTimeMillis() - lastPlayersMissileStart > Constants.PLAYER_FIRE_INTERVAL) {
             playerMissiles.add(new PlayerMissile(player.getX() + Constants.PLAYER_WIDTH / 2 - 2, player.getY()));
             lastPlayersMissileStart = System.currentTimeMillis();
         }
+        player.addShot();
     }
 
     public void shootEnemyMissile(Enemy enemy) {
@@ -149,5 +186,9 @@ public class GameModel {
 
     public void moveLeft() {
         player.moveLeft();
+    }
+
+    public DifficultySettings getDifficultySettings() {
+        return difficultySettings;
     }
 }

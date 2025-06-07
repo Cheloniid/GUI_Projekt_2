@@ -8,6 +8,7 @@ public class Player {
     private int health;
     private int score;
     private int level;
+    private int shotsFired;
     private String name;
 
 
@@ -17,6 +18,7 @@ public class Player {
         this.health = 100;
         this.score = 0;
         this.level = 1;
+        this.shotsFired = 0;
 
     }
 
@@ -26,6 +28,7 @@ public class Player {
         this.health = 100;
         this.score = 0;
         this.level = 1;
+        this.shotsFired = 0;
     }
 
     public static int getStartingX(){
@@ -111,5 +114,13 @@ public class Player {
 
     public String getName() {
         return name;
+    }
+
+    public void addShot(){
+        this.shotsFired++;
+    }
+
+    public int getShotsFired(){
+        return this.shotsFired;
     }
 }

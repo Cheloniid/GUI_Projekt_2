@@ -60,6 +60,12 @@ public class GameController {
         if (model.getPlayer().isDead()){
             onGameOver();
         }
+
+        int scoreTarget = Constants.DEBUG_MODE ? 20 : 100;
+        if (model.getDifficultySettings().targetPractice
+                && model.getPlayer().getScore() >= scoreTarget) {
+            onTargetPracticeEnd();
+        }
     }
 
     public void pauseResumeGame() {
@@ -70,18 +76,11 @@ public class GameController {
             isGamePaused = false;
             gameTimer.restart();
         }
-
-        if (Constants.DEBUG_MODE && isGamePaused){
-            DataUploader.uploadData(JSONConverter.toJSON(new DataToUpload(model.getPlayer())));
-            System.out.println(DataFetcher.fetchData());
-        }
-
-
     }
 
     public void startNewGame() {
         // Upload scores from the previous game
-        if(isGameStarted) {
+        if(isGameStarted && model.getDifficultySettings().isNormal()) {
             uploadScores();
         }
 
@@ -100,13 +99,25 @@ public class GameController {
         scoresUploaded = false;
     }
 
+    public void onTargetPracticeEnd(){
+        gameTimer.stop();
+        isGameOver = true;
+        isGameStarted = false;
+        isGamePaused = false;
+
+        view.showTargetPracticeEndMessage(
+                model.getPlayer().getScore(), model.getPlayer().getShotsFired());
+    }
+
     public void onGameOver() {
         gameTimer.stop();
         isGameOver = true;
         isGameStarted = false;
         isGamePaused = false;
 
-        uploadScores();
+        if (model.getDifficultySettings().isNormal()){
+            uploadScores();
+        }
 
         //DataUploader.uploadData(JSONConverter.toJSON(new DataToUpload(model.getPlayer())));
         view.showEndGameMsg(model.getPlayer().getScore());

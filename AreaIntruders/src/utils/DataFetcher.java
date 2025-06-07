@@ -17,7 +17,11 @@ public class DataFetcher {
         URL download_url;
 
         try {
-            download_url = new URL(Constants.DOWNLOAD_ENDPOINT);
+            if (Constants.USE_LOCAL_ENDPOINTS) {
+                download_url = new URL(Constants.DOWNLOAD_LOCAL_ENDPOINT);
+            } else {
+                download_url = new URL(Constants.DOWNLOAD_ENDPOINT);
+            }
             HttpURLConnection connection = (HttpURLConnection) download_url.openConnection();
             connection.setRequestMethod("GET");
 

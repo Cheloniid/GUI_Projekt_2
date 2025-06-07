@@ -85,7 +85,9 @@ public class MainFrame extends JFrame {
                 if(Constants.DEBUG_MODE){
                     System.out.println("Scores uploaded in window listener: " + controller.isScoresUploaded());
                 }
-                controller.uploadScores();
+                if (model.getDifficultySettings().isNormal()){
+                    controller.uploadScores();
+                }
             }
         });
 
@@ -151,15 +153,26 @@ public class MainFrame extends JFrame {
                 model.changeDifficulty(DifficultySettings.normalSettings());
                 controller.startNewGame();
             });
+            JRadioButtonMenuItem targetPracticeItem = new JRadioButtonMenuItem("Target Practice");
+            targetPracticeItem.setBackground(Constants.UFO_WINDOW_COLOR);
+            targetPracticeItem.addActionListener(e -> {
+                if (Constants.DEBUG_MODE){
+                    System.out.println("Inside targetPracticeItem action listener");
+                }
+                model.changeDifficulty(DifficultySettings.targetPracticeMode());
+                controller.startNewGame();
+            });
 
 
             ButtonGroup diffGroup = new ButtonGroup();
             diffGroup.add(easyItem);
             diffGroup.add(normalItem);
+            diffGroup.add(targetPracticeItem);
             normalItem.setSelected(true);
 
             difficultyMenu.add(easyItem);
             difficultyMenu.add(normalItem);
+            difficultyMenu.add(targetPracticeItem);
 
             menuBar.add(difficultyMenu);
         }
@@ -229,5 +242,13 @@ public class MainFrame extends JFrame {
 
     public void setModel(GameModel model) {
         this.model = model;
+    }
+
+    public void showTargetPracticeEndMessage(int score, int shots) {
+        int accuracy = (int) ((double) score / (double) shots * 10);
+        JOptionPane.showMessageDialog(gamePanel,
+                "Target practice complete!\nYou fired "
+                        + shots + " shots with " + accuracy + "% accuracy.",
+                "Game Over", JOptionPane.INFORMATION_MESSAGE);
     }
 }
