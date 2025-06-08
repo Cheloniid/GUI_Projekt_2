@@ -3,7 +3,7 @@ package utils;
 import java.awt.*;
 
 public class Constants {
-    public static final boolean USE_LOCAL_ENDPOINTS = true;
+    public static final boolean USE_LOCAL_ENDPOINTS = false;
     public static final String UPLOAD_ENDPOINT = "http://gatewayantares.com:1337/upload";
     public static final String DOWNLOAD_ENDPOINT = "http://gatewayantares.com:1337/get-top-10";
     public static final String UPLOAD_LOCAL_ENDPOINT = "http://127.0.0.1:5000/upload";
@@ -23,7 +23,7 @@ public class Constants {
     public static final boolean SHOOT_ENEMY_MISSILES = true;
     public static final boolean DETECT_COLLISIONS_WITH_ENEMY = true;
     public static final boolean DETECT_COLLISIONS_WITH_PLAYER = true;
-    public static final boolean ENABLE_DIFFICULTY_SETTINGS = true;
+    public static final boolean ENABLE_DIFFICULTY_SETTINGS = false;
 
     public static final int PLAYER_WIDTH = 20;
     public static final int PLAYER_HEIGHT = 30;
