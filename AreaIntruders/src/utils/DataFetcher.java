@@ -8,6 +8,8 @@ import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.net.URL;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class DataFetcher {
 
@@ -39,23 +41,23 @@ public class DataFetcher {
             if (rawText.startsWith("[")) {
                 rawText = rawText.substring(1, rawText.length());
             }
-            if (rawText.endsWith("]")){
-                rawText = rawText.substring(0, rawText.length()-1);
+            if (rawText.endsWith("]")) {
+                rawText = rawText.substring(0, rawText.length() - 1);
             }
 
             String[] entries = rawText.split(",");
-            for (String entry : entries) {
-                entry = entry.trim();
-                entry = entry.replaceAll("\"", "");
+            topScores = Stream.of(entries)
+                    .map(entry -> entry = entry.trim().replaceAll("\"", ""))
+                    .map(entry -> {
+                        String[] parts = entry.split(";");
+                        TopScoreEntry topScoreEntry = new TopScoreEntry();
+                        topScoreEntry.no = Integer.parseInt(parts[0]);
+                        topScoreEntry.score = Integer.parseInt(parts[1]);
+                        topScoreEntry.name = parts[2];
+                        return topScoreEntry;
+                    })
+                    .collect(Collectors.toList());
 
-                String[] parts = entry.split(";");
-                TopScoreEntry topScoreEntry = new TopScoreEntry();
-                topScoreEntry.no = Integer.parseInt(parts[0]);
-                topScoreEntry.score = Integer.parseInt(parts[1]);
-                topScoreEntry.name = parts[2];
-
-                topScores.add(topScoreEntry);
-            }
         } catch (MalformedURLException e) {
             System.out.println("Malformed Download URL");
             return topScores;
